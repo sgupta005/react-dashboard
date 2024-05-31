@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Settings from './pages/Settings';
 import Users from './pages/Users';
-import AppLayout from './components/AppLayout';
+import AppLayout from './ui/AppLayout';
 
 function App() {
   return (
