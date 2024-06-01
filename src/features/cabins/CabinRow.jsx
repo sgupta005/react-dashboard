@@ -1,15 +1,40 @@
+import { deleteCabin } from '@/services/apiCabins';
 import { Button } from '@/ui/shadcn/ui/button';
 import { TableCell, TableRow } from '@/ui/shadcn/ui/table';
 import { formatCurrency } from '@/utils/helpers';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 function CabinRow({ cabin }) {
-  const { name, maxCapacity, regularPrice, discount, description, image } =
-    cabin;
+  const {
+    id: cabinId,
+    name,
+    maxCapacity,
+    regularPrice,
+    discount,
+    description,
+    image,
+  } = cabin;
+
+  const queryClient = useQueryClient();
+
+  const { isLoading: isDeleting, mutate } = useMutation({
+    mutationFn: deleteCabin,
+    onSuccess: () => {
+      toast.success('Cabin deleted successully.');
+      queryClient.invalidateQueries({
+        queryKey: ['cabins'],
+      });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
   return (
     <TableRow>
       <TableCell className="hidden sm:table-cell">
         <img
-          alt="Product image"
+          alt="Cabin image"
           className="aspect-rectangle object-cover"
           height="64"
           src={image}
@@ -27,7 +52,13 @@ function CabinRow({ cabin }) {
       </TableCell>
 
       <TableCell>
-        <Button variant="outline">Delete</Button>
+        <Button
+          variant="outline"
+          onClick={() => mutate(cabinId)}
+          disabled={isDeleting}
+        >
+          Delete
+        </Button>
       </TableCell>
     </TableRow>
   );
