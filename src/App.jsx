@@ -12,6 +12,7 @@ import Settings from './pages/Settings';
 import Users from './pages/Users';
 import AppLayout from './ui/AppLayout';
 import { Toaster } from 'react-hot-toast';
+import { Button } from './ui/shadcn/ui/button';
 
 const queryClient = new QueryClient({
   defaultOptions: {

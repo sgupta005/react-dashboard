@@ -3,9 +3,9 @@ import { Sidebar } from './Sidebar';
 
 function AppLayout() {
   return (
-    <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+    <div className="flex min-h-screen ">
       <Sidebar />
-      <main>
+      <main className="flex-grow w-full mx-8 space-y-6 mt-6">
         <Outlet />
       </main>
     </div>

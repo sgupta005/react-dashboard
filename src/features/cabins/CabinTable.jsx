@@ -19,11 +19,7 @@ import { useQuery } from '@tanstack/react-query';
 import CabinRow from './CabinRow';
 
 function CabinTable() {
-  const {
-    isLoading,
-    data: cabins,
-    error,
-  } = useQuery({
+  const { isLoading, data: cabins } = useQuery({
     queryKey: ['cabins'],
     queryFn: getCabins,
   });
@@ -33,7 +29,7 @@ function CabinTable() {
       <LoadingSpinner className="h-32 w-32 flex mx-auto justify-center items-center mt-20" />
     );
   return (
-    <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+    <main className="grid flex-1 items-start ">
       <Tabs defaultValue="all">
         <TabsContent value="all">
           <Card x-chunk="dashboard-06-chunk-0">
@@ -57,10 +53,11 @@ function CabinTable() {
                     </TableHead>
                     <TableHead>CABIN</TableHead>
                     <TableHead>CAPACITY</TableHead>
-                    <TableHead className="hidden md:table-cell">
-                      PRICE
-                    </TableHead>
-                    <TableHead className="hidden md:table-cell">
+                    <TableHead className=" md:table-cell">PRICE</TableHead>
+                    <TableHead
+                      className="
+                     md:table-cell"
+                    >
                       DISCOUNT
                     </TableHead>
 

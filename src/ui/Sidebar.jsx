@@ -3,7 +3,7 @@ import { Calendar, Home, School, Settings, Users } from 'lucide-react';
 
 export function Sidebar() {
   return (
-    <div className="hidden border-r bg-muted/40 md:block">
+    <div className="hidden border-r bg-muted/40 md:block ">
       <div className="flex flex-col gap-2">
         <img
           src="/logo-light.png"

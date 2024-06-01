@@ -12,7 +12,6 @@ function CabinRow({ cabin }) {
     maxCapacity,
     regularPrice,
     discount,
-    description,
     image,
   } = cabin;
 
@@ -31,7 +30,7 @@ function CabinRow({ cabin }) {
     },
   });
   return (
-    <TableRow>
+    <TableRow className>
       <TableCell className="hidden sm:table-cell">
         <img
           alt="Cabin image"
@@ -41,13 +40,11 @@ function CabinRow({ cabin }) {
         />
       </TableCell>
       <TableCell className="font-medium">{name}</TableCell>
-      <TableCell className="hidden md:table-cell">
-        Fits up to {maxCapacity}
-      </TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell className=" md:table-cell">Fits up to {maxCapacity}</TableCell>
+      <TableCell className=" md:table-cell">
         {formatCurrency(regularPrice)}
       </TableCell>
-      <TableCell className="hidden md:table-cell">
+      <TableCell className=" md:table-cell">
         {formatCurrency(discount)}
       </TableCell>
 
