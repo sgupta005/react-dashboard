@@ -26,13 +26,13 @@ function CabinTable() {
 
   if (isLoading)
     return (
-      <LoadingSpinner className="h-32 w-32 flex mx-auto justify-center items-center mt-20" />
+      <LoadingSpinner className="h-32 w-32 flex mx-auto justify-center items-center my-20" />
     );
   return (
     <main className="grid flex-1 items-start ">
       <Tabs defaultValue="all">
         <TabsContent value="all">
-          <Card x-chunk="dashboard-06-chunk-0">
+          <Card x-chunk="dashboard-06-chunk-0" className="bg-muted/40">
             <CardHeader>
               <div className="flex justify-between">
                 <CardTitle>All Cabins</CardTitle>

@@ -30,7 +30,7 @@ function CabinRow({ cabin }) {
     },
   });
   return (
-    <TableRow className>
+    <TableRow>
       <TableCell className="hidden sm:table-cell">
         <img
           alt="Cabin image"
