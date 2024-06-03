@@ -6,7 +6,7 @@ import { useState } from 'react';
 function Cabins() {
   const [showCreateCabinForm, setShowCreateCabinForm] = useState(false);
   return (
-    <>
+    <div className="mx-8 space-y-6 mt-6">
       <CabinTable />
       <Button
         className={' w-full'}
@@ -15,7 +15,7 @@ function Cabins() {
         Add new Cabin
       </Button>
       {showCreateCabinForm && <CreateCabinForm />}
-    </>
+    </div>
   );
 }
 

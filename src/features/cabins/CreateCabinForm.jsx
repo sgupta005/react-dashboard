@@ -27,7 +27,7 @@ export default function CreateCabinForm() {
   });
 
   function onSubmit(data) {
-    mutate(data);
+    mutate({ ...data, image: data.image[0] });
   }
   return (
     <Card className="w-full bg-muted/40">
@@ -39,6 +39,7 @@ export default function CreateCabinForm() {
                 required: 'This field is required',
               })}
               id="name"
+              disabled={isCreating}
               className={
                 errors?.name?.message
                   ? 'border-2 outline-red-600 border-red-600 shadow-sm rounded-sm p-1 w-52 '
@@ -58,6 +59,7 @@ export default function CreateCabinForm() {
                   message: "Capacity can't be less than 1",
                 },
               })}
+              disabled={isCreating}
               type="number"
               id="maxCapacity"
               className={
@@ -76,6 +78,7 @@ export default function CreateCabinForm() {
                   message: "Price can't be less than 0",
                 },
               })}
+              disabled={isCreating}
               type="number"
               id="regularPrice"
               className={
@@ -98,6 +101,7 @@ export default function CreateCabinForm() {
                   'Discount must be less than Price',
               })}
               defaultValue={0}
+              disabled={isCreating}
               type="number"
               id="discount"
               className={
@@ -113,11 +117,22 @@ export default function CreateCabinForm() {
                 required: 'This field is required',
               })}
               id="description"
+              disabled={isCreating}
               className={
                 errors?.description?.message
                   ? 'border-2 outline-red-600 border-red-600 shadow-sm rounded-sm p-1 w-52 '
                   : 'border shadow-sm rounded-sm p-1 w-52 '
               }
+            />
+          </FormRow>
+          <FormRow label="Cabin Image" error={errors?.image?.message}>
+            <input
+              type="file"
+              id="image"
+              accept="image/jpg"
+              {...register('image', {
+                required: 'This field is required',
+              })}
             />
           </FormRow>
         </CardContent>

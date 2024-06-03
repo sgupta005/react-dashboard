@@ -4,14 +4,12 @@ import Header from './Header';
 
 function AppLayout() {
   return (
-    <div className="flex min-h-screen ">
+    <div className="h-screen grid [grid-template-rows:60px_1fr] [grid-template-columns:300px_1fr]">
       <Sidebar />
-      <div className="flex-grow w-full">
-        <Header />
-        <main className="mx-8 space-y-6 mt-6">
-          <Outlet />
-        </main>
-      </div>
+      <Header />
+      <main className="[grid-column:2/3] [grid-row:2/3] overflow-auto">
+        <Outlet />
+      </main>
     </div>
   );
 }
