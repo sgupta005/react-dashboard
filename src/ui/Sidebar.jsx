@@ -1,7 +1,7 @@
 import { Calendar, Home, School, Settings, Users } from "lucide-react";
 import SidebarLink from "./SidebarLink";
 
-export function Sidebar() {
+export default function Sidebar() {
   return (
     <div className="w-0 border-r bg-muted/40 [grid-column:1/2] [grid-row:1/3] md:w-[300px]">
       <div className="flex flex-col gap-2">
