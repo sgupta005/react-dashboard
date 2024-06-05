@@ -1,35 +1,31 @@
-import { getCabins } from '@/services/apiCabins';
-import { LoadingSpinner } from '@/ui/Spinner';
+import { LoadingSpinner } from "@/ui/Spinner";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/ui/shadcn/ui/card';
+} from "@/ui/shadcn/ui/card";
 import {
   Table,
   TableBody,
   TableHead,
   TableHeader,
   TableRow,
-} from '@/ui/shadcn/ui/table';
-import { Tabs, TabsContent } from '@radix-ui/react-tabs';
-import { useQuery } from '@tanstack/react-query';
-import CabinRow from './CabinRow';
+} from "@/ui/shadcn/ui/table";
+import { Tabs, TabsContent } from "@radix-ui/react-tabs";
+import CabinRow from "./CabinRow";
+import { useCabins } from "./useCabins";
 
 function CabinTable() {
-  const { isLoading, data: cabins } = useQuery({
-    queryKey: ['cabins'],
-    queryFn: getCabins,
-  });
+  const { isLoading, cabins } = useCabins();
 
   if (isLoading)
     return (
-      <LoadingSpinner className="h-32 w-32 flex mx-auto justify-center items-center my-20" />
+      <LoadingSpinner className="mx-auto my-20 flex h-32 w-32 items-center justify-center" />
     );
   return (
-    <main className="grid flex-1 items-start ">
+    <main className="grid flex-1 items-start">
       <Tabs defaultValue="all">
         <TabsContent value="all">
           <Card x-chunk="dashboard-06-chunk-0" className="bg-muted/40">
@@ -53,13 +49,8 @@ function CabinTable() {
                     </TableHead>
                     <TableHead>CABIN</TableHead>
                     <TableHead>CAPACITY</TableHead>
-                    <TableHead className=" md:table-cell">PRICE</TableHead>
-                    <TableHead
-                      className="
-                     md:table-cell"
-                    >
-                      DISCOUNT
-                    </TableHead>
+                    <TableHead className="md:table-cell">PRICE</TableHead>
+                    <TableHead className="md:table-cell">DISCOUNT</TableHead>
 
                     <TableHead>
                       <span className="sr-only">Actions</span>

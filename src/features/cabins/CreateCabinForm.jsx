@@ -1,13 +1,9 @@
-import {
-  createCabin as createCabinApi,
-  editCabin as editCabinApi,
-} from "@/services/apiCabins";
 import { Button } from "@/ui/shadcn/ui/button";
 import { Card, CardContent, CardFooter } from "@/ui/shadcn/ui/card";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
+import { useEditCabin } from "./useEditCabin";
+import { useCreateCabin } from "./useCreateCabin";
 import FormRow from "@/ui/FormRow";
 
 export default function CreateCabinForm({ cabinToEdit = {} }) {
@@ -19,42 +15,25 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
   });
   const { errors } = formState;
 
-  const queryClient = useQueryClient();
-  const { isLoading: isCreating, mutate: createCabin } = useMutation({
-    mutationFn: createCabinApi,
-    onSuccess: () => {
-      toast.success("New cabin created successfully.");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err) => {
-      toast.error(err.message);
-      console.error(err);
-    },
-  });
-
-  const { isLoading: isEditing, mutate: editCabin } = useMutation({
-    mutationFn: ({ cabin, id }) => editCabinApi(cabin, id),
-    onSuccess: () => {
-      toast.success("Cabin edited successfully.");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-      reset();
-    },
-    onError: (err) => {
-      toast.error(err.message);
-      console.error(err);
-    },
-  });
-
+  const { isCreating, createCabin } = useCreateCabin();
+  const { isEditing, editCabin } = useEditCabin();
   const isWorking = isCreating || isEditing;
 
   function onSubmit(data) {
-    if (isEditSession) editCabin({ cabin: data, id: editId });
-    else createCabin({ ...data, image: data.image[0] });
+    if (isEditSession)
+      editCabin(
+        { cabin: data, id: editId },
+        {
+          onSuccess: () => reset(),
+        },
+      );
+    else
+      createCabin(
+        { ...data, image: data.image[0] },
+        {
+          onSuccess: () => reset(),
+        },
+      );
   }
   return (
     <Card className="w-full bg-muted/40">

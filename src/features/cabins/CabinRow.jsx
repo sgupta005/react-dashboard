@@ -1,10 +1,8 @@
-import { deleteCabin } from "@/services/apiCabins";
 import { Button } from "@/ui/shadcn/ui/button";
 import { TableCell, TableRow } from "@/ui/shadcn/ui/table";
 import { formatCurrency } from "@/utils/helpers";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import { useDeleteCabin } from "./useDeleteCabins";
 import CreateCabinForm from "./CreateCabinForm";
 
 function CabinRow({ cabin }) {
@@ -18,20 +16,8 @@ function CabinRow({ cabin }) {
     image,
   } = cabin;
 
-  const queryClient = useQueryClient();
+  const { isDeleting, deleteCabin } = useDeleteCabin();
 
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteCabin,
-    onSuccess: () => {
-      toast.success("Cabin deleted successully.");
-      queryClient.invalidateQueries({
-        queryKey: ["cabins"],
-      });
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
   return (
     <>
       <TableRow>
@@ -50,13 +36,17 @@ function CabinRow({ cabin }) {
         <TableCell className="font-semibold md:table-cell">
           {formatCurrency(regularPrice)}
         </TableCell>
-        <TableCell className="font-semibold text-green-500 md:table-cell">
-          {formatCurrency(discount)}
+        <TableCell className="font-semibold md:table-cell">
+          {discount ? (
+            <span className="text-green-500">{formatCurrency(discount)}</span>
+          ) : (
+            <span>&mdash;</span>
+          )}
         </TableCell>
         <TableCell className="space-x-4">
           <Button
             variant="outline"
-            onClick={() => mutate(cabinId)}
+            onClick={() => deleteCabin(cabinId)}
             disabled={isDeleting}
           >
             Delete
