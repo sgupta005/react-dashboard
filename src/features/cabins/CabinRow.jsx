@@ -4,6 +4,7 @@ import { formatCurrency } from "@/utils/helpers";
 import { useState } from "react";
 import { useDeleteCabin } from "./useDeleteCabins";
 import CreateCabinForm from "./CreateCabinForm";
+import { useCreateCabin } from "./useCreateCabin";
 
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
@@ -13,10 +14,23 @@ function CabinRow({ cabin }) {
     maxCapacity,
     regularPrice,
     discount,
+    description,
     image,
   } = cabin;
 
   const { isDeleting, deleteCabin } = useDeleteCabin();
+
+  const { isCreating, createCabin } = useCreateCabin();
+  function handleDuplicate() {
+    createCabin({
+      name: `Copy of ${cabin.name}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      description,
+      image,
+    });
+  }
 
   return (
     <>
@@ -31,7 +45,7 @@ function CabinRow({ cabin }) {
         </TableCell>
         <TableCell className="font-medium">{name}</TableCell>
         <TableCell className="md:table-cell">
-          Fits up to {maxCapacity}
+          Fits up to {maxCapacity} guests
         </TableCell>
         <TableCell className="font-semibold md:table-cell">
           {formatCurrency(regularPrice)}
@@ -40,7 +54,7 @@ function CabinRow({ cabin }) {
           {discount ? (
             <span className="text-green-500">{formatCurrency(discount)}</span>
           ) : (
-            <span>&mdash;</span>
+            <span className="text-orange-300">&mdash;</span>
           )}
         </TableCell>
         <TableCell className="space-x-4">
@@ -56,6 +70,13 @@ function CabinRow({ cabin }) {
             onClick={() => setShowForm((show) => !show)}
           >
             Edit
+          </Button>
+          <Button
+            variant="outline"
+            disabled={isCreating}
+            onClick={() => handleDuplicate()}
+          >
+            Duplicate
           </Button>
         </TableCell>
       </TableRow>

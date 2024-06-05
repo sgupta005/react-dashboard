@@ -10,7 +10,11 @@ export async function getCabins() {
 }
 
 export async function createCabin(newCabin) {
-  const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
+  //Checking if cabin already has image path, this will happen when duplicate cabin is created.
+  const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
+
+  //Creating new image path
+  const imageName = `${Math.random()}-${newCabin.image?.name}`.replaceAll(
     "/",
     "",
   );
@@ -21,7 +25,7 @@ export async function createCabin(newCabin) {
   //1.Create cabin
   const { data, error } = await supabase
     .from("cabins")
-    .insert([{ ...newCabin, image: imagePath }])
+    .insert([{ ...newCabin, image: hasImagePath ? newCabin.image : imagePath }])
     .select();
   if (error) {
     console.error(error);
@@ -29,6 +33,7 @@ export async function createCabin(newCabin) {
   }
 
   //2.Add Image to Bucket
+  if (hasImagePath) return data;
   const storageError = await addImageToBucket(imageName, newCabin.image);
 
   //3.If error in adding image then delete cabin
@@ -39,6 +44,8 @@ export async function createCabin(newCabin) {
       "Cabin image could not be uploaded and cabin was not created.",
     );
   }
+
+  return data;
 }
 
 async function addImageToBucket(imageName, image) {
