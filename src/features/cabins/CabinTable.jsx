@@ -20,10 +20,7 @@ import { useCabins } from "./useCabins";
 function CabinTable() {
   const { isLoading, cabins } = useCabins();
 
-  if (isLoading)
-    return (
-      <LoadingSpinner className="mx-auto my-20 flex h-32 w-32 items-center justify-center" />
-    );
+  if (isLoading) return <LoadingSpinner />;
   return (
     <main className="grid flex-1 items-start">
       <Tabs defaultValue="all">
