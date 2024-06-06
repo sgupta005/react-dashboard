@@ -36,9 +36,9 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
       );
   }
   return (
-    <Card className="w-full bg-muted/40">
+    <Card className="flex w-full items-center justify-center border-none pl-[5%] pr-[10%] shadow-none">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent className="mt-6 grid gap-4">
+        <CardContent className="grid gap-4">
           <FormRow label="Cabin Name" error={errors?.name?.message}>
             <input
               {...register("name", {
@@ -49,7 +49,7 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
               className={
                 errors?.name?.message
                   ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border p-1 shadow-sm"
+                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
               }
             />
           </FormRow>
@@ -71,7 +71,7 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
               className={
                 errors?.maxCapacity?.message
                   ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border p-1 shadow-sm"
+                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
               }
             />
           </FormRow>
@@ -90,7 +90,7 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
               className={
                 errors?.regularPrice?.message
                   ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border p-1 shadow-sm"
+                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
               }
             />
           </FormRow>
@@ -113,7 +113,7 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
               className={
                 errors?.discount?.message
                   ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border p-1 shadow-sm"
+                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
               }
             />
           </FormRow>
@@ -127,7 +127,7 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
               className={
                 errors?.description?.message
                   ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border p-1 shadow-sm"
+                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
               }
             />
           </FormRow>

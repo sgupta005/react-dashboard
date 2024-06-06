@@ -1,11 +1,11 @@
-import { Label } from '@radix-ui/react-label';
+import { Label } from "@radix-ui/react-label";
 
 function FormRow({ children, label, error }) {
   return (
-    <div className="pl-6 grid grid-cols-4  items-center">
+    <div className="grid grid-cols-4 items-center pl-6">
       <Label
         htmlFor={children.props.id}
-        className={error ? 'text-red-600' : ''}
+        className={error ? "text-red-600" : ""}
       >
         {label}
       </Label>
