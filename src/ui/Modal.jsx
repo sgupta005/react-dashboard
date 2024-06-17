@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { Button } from "./shadcn/ui/button";
 import { X } from "lucide-react";
 import { cloneElement, createContext, useContext, useState } from "react";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 
 const ModalContext = createContext();
 
@@ -23,12 +24,16 @@ function Open({ children, opens }) {
 
 function Window({ children, name }) {
   const { close, openName } = useContext(ModalContext);
+  const ref = useOutsideClick(close);
 
   if (name !== openName) return null;
 
   return createPortal(
     <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center backdrop-blur-sm">
-      <div className="h-[60%] w-[80%] space-y-4 bg-background shadow-2xl">
+      <div
+        className="h-max w-max space-y-4 bg-background pb-6 shadow-2xl"
+        ref={ref}
+      >
         <Button
           className="ml-auto mr-4 mt-4 block"
           variant="outline"

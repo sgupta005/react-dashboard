@@ -1,13 +1,13 @@
 import { Button } from "@/ui/shadcn/ui/button";
 import { TableCell, TableRow } from "@/ui/shadcn/ui/table";
 import { formatCurrency } from "@/utils/helpers";
-import { useState } from "react";
 import { useDeleteCabin } from "./useDeleteCabins";
 import CreateCabinForm from "./CreateCabinForm";
 import { useCreateCabin } from "./useCreateCabin";
+import Modal from "@/ui/Modal";
+import ConfirmDelete from "@/ui/ConfirmDelete";
 
 function CabinRow({ cabin }) {
-  const [showForm, setShowForm] = useState(false);
   const {
     id: cabinId,
     name,
@@ -60,27 +60,33 @@ function CabinRow({ cabin }) {
         <TableCell className="space-x-4">
           <Button
             variant="outline"
-            onClick={() => deleteCabin(cabinId)}
-            disabled={isDeleting}
-          >
-            Delete
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => setShowForm((show) => !show)}
-          >
-            Edit
-          </Button>
-          <Button
-            variant="outline"
             disabled={isCreating}
             onClick={() => handleDuplicate()}
           >
             Duplicate
           </Button>
+
+          <Modal>
+            <Modal.Open opens="edit">
+              <Button variant="outline">Edit</Button>
+            </Modal.Open>
+            <Modal.Window name="edit">
+              <CreateCabinForm cabinToEdit={cabin} />
+            </Modal.Window>
+
+            <Modal.Open>
+              <Button variant="outline">Delete</Button>
+            </Modal.Open>
+            <Modal.Window>
+              <ConfirmDelete
+                disabled={isDeleting}
+                resourceName="Cabin"
+                onConfirm={() => deleteCabin(cabinId)}
+              />
+            </Modal.Window>
+          </Modal>
         </TableCell>
       </TableRow>
-      {showForm && <CreateCabinForm cabinToEdit={cabin} />}
     </>
   );
 }
