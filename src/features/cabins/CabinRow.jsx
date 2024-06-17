@@ -6,6 +6,15 @@ import CreateCabinForm from "./CreateCabinForm";
 import { useCreateCabin } from "./useCreateCabin";
 import Modal from "@/ui/Modal";
 import ConfirmDelete from "@/ui/ConfirmDelete";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/ui/shadcn/ui/dropdown-menu";
+import { Copy, MoreHorizontal, Pencil, Trash } from "lucide-react";
+import MenuItem from "@/ui/MenuItem";
 
 function CabinRow({ cabin }) {
   const {
@@ -35,11 +44,10 @@ function CabinRow({ cabin }) {
   return (
     <>
       <TableRow>
-        <TableCell className="hidden sm:table-cell">
+        <TableCell className="hidden md:table-cell">
           <img
             alt="Cabin image"
-            className="aspect-rectangle object-cover"
-            height="64"
+            className="aspect-rectangle h-[64px] object-cover"
             src={image}
           />
         </TableCell>
@@ -58,26 +66,47 @@ function CabinRow({ cabin }) {
           )}
         </TableCell>
         <TableCell className="space-x-4">
-          <Button
-            variant="outline"
-            disabled={isCreating}
-            onClick={() => handleDuplicate()}
-          >
-            Duplicate
-          </Button>
-
           <Modal>
-            <Modal.Open opens="edit">
-              <Button variant="outline">Edit</Button>
-            </Modal.Open>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  aria-haspopup="true"
+                  size="icon"
+                  variant="ghost"
+                  className="hover:bg-muted-foreground/5"
+                >
+                  <MoreHorizontal className="h-4 w-4" />
+                  <span className="sr-only">Toggle menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+
+              <DropdownMenuContent align="end">
+                <MenuItem onClick={() => handleDuplicate()}>
+                  <Copy />
+                  <span>Duplicate</span>
+                </MenuItem>
+
+                <Modal.Open opens="edit">
+                  <MenuItem>
+                    <Pencil />
+                    <span>Edit</span>
+                  </MenuItem>
+                </Modal.Open>
+
+                <Modal.Open opens="delete">
+                  <MenuItem>
+                    <Trash />
+                    <span>Delete</span>
+                  </MenuItem>
+                </Modal.Open>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             <Modal.Window name="edit">
               <CreateCabinForm cabinToEdit={cabin} />
             </Modal.Window>
 
-            <Modal.Open>
-              <Button variant="outline">Delete</Button>
-            </Modal.Open>
-            <Modal.Window>
+            <Modal.Window name="delete">
               <ConfirmDelete
                 disabled={isDeleting}
                 resourceName="Cabin"

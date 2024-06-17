@@ -31,7 +31,7 @@ function Window({ children, name }) {
   return createPortal(
     <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center backdrop-blur-sm">
       <div
-        className="h-max w-max space-y-4 bg-background pb-6 shadow-2xl"
+        className="h-max w-max space-y-4 rounded-md bg-background pb-6 shadow-2xl"
         ref={ref}
       >
         <Button

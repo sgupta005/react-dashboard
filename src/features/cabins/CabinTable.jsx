@@ -41,11 +41,11 @@ function CabinTable() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="hidden w-[100px] sm:table-cell">
+                    <TableHead className="hidden w-[150px] md:table-cell">
                       <span className="sr-only">Image</span>
                     </TableHead>
-                    <TableHead>CABIN</TableHead>
-                    <TableHead>CAPACITY</TableHead>
+                    <TableHead className="">CABIN</TableHead>
+                    <TableHead className="md:w-[275px]">CAPACITY</TableHead>
                     <TableHead className="md:table-cell">PRICE</TableHead>
                     <TableHead className="md:table-cell">DISCOUNT</TableHead>
 
