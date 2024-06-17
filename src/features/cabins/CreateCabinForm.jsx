@@ -6,7 +6,7 @@ import { useEditCabin } from "./useEditCabin";
 import { useCreateCabin } from "./useCreateCabin";
 import FormRow from "@/ui/FormRow";
 
-export default function CreateCabinForm({ cabinToEdit = {} }) {
+export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
   const { id: editId, ...editValues } = cabinToEdit;
   const isEditSession = Boolean(editId);
 
@@ -34,6 +34,7 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
           onSuccess: () => reset(),
         },
       );
+    onClose?.();
   }
   return (
     <Card className="flex w-full items-center justify-center border-none pl-[5%] pr-[10%] shadow-none">
@@ -139,14 +140,20 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
               {...register("image", {
                 required: isEditSession ? false : "This field is required",
               })}
+              className="file:boder-none file:mr-4 file:rounded-md file:bg-primary file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary-foreground file:hover:bg-primary/90"
             />
           </FormRow>
         </CardContent>
         <CardFooter className="flex justify-end gap-4">
-          <Button variant="outline" type="reset">
+          <Button
+            variant="outline"
+            size="lg"
+            type="reset"
+            onClick={() => onClose?.()}
+          >
             Cancel
           </Button>
-          <Button disabled={isWorking}>
+          <Button disabled={isWorking} size="lg">
             {isEditSession ? "Edit Cabin" : "Add Cabin"}
           </Button>
         </CardFooter>

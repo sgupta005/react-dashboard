@@ -1,25 +1,17 @@
 import { Button } from "@/ui/shadcn/ui/button";
 import CreateCabinForm from "./CreateCabinForm";
-import { useState } from "react";
 import Modal from "@/ui/Modal";
 
 function AddCabin() {
-  const [showCreateCabinForm, setShowCreateCabinForm] = useState(false);
-
   return (
-    <>
-      <Button
-        className={"w-full"}
-        onClick={() => setShowCreateCabinForm((show) => !show)}
-      >
-        Add new Cabin
-      </Button>
-      {showCreateCabinForm && (
-        <Modal onClose={setShowCreateCabinForm}>
-          <CreateCabinForm />
-        </Modal>
-      )}
-    </>
+    <Modal>
+      <Modal.Open opens="cabin-form">
+        <Button className="w-full">Add new Cabin</Button>
+      </Modal.Open>
+      <Modal.Window name="cabin-form">
+        <CreateCabinForm />
+      </Modal.Window>
+    </Modal>
   );
 }
 
