@@ -9,8 +9,6 @@ import ConfirmDelete from "@/ui/ConfirmDelete";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/ui/shadcn/ui/dropdown-menu";
 import { Copy, MoreHorizontal, Pencil, Trash } from "lucide-react";
@@ -29,7 +27,7 @@ function CabinRow({ cabin }) {
 
   const { isDeleting, deleteCabin } = useDeleteCabin();
 
-  const { isCreating, createCabin } = useCreateCabin();
+  const { createCabin } = useCreateCabin();
   function handleDuplicate() {
     createCabin({
       name: `Copy of ${cabin.name}`,
