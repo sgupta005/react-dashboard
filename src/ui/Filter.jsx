@@ -11,7 +11,7 @@ function Filter({ filterField, options }) {
   }
   return (
     <Tabs defaultValue={defaultValue}>
-      <TabsList className="bg-muted-foreground/10">
+      <TabsList className="border border-input bg-background text-primary">
         {options.map((option) => (
           <TabsTrigger
             key={option.value}

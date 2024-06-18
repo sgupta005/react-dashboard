@@ -20,9 +20,11 @@ import { useSearchParams } from "react-router-dom";
 
 function CabinTable() {
   const { isLoading, cabins } = useCabins();
-
   const [searchParams] = useSearchParams();
+
   const filterValue = searchParams.get("discount") || "all";
+  const sortValue = searchParams.get("sortBy") || "";
+
   let filteredCabins = [];
 
   if (filterValue === "all") filteredCabins = cabins;
@@ -30,6 +32,23 @@ function CabinTable() {
     filteredCabins = cabins?.filter((cabin) => cabin.discount === 0);
   if (filterValue === "with-discount")
     filteredCabins = cabins?.filter((cabin) => cabin.discount > 0);
+
+  if (sortValue === "name-asc")
+    filteredCabins?.sort((a, b) => Number(a.name) - Number(b.name));
+  if (sortValue === "name-desc")
+    filteredCabins?.sort((a, b) => Number(b.name) - Number(a.name));
+  if (sortValue === "regularPrice-asc")
+    filteredCabins?.sort(
+      (a, b) => Number(a.regularPrice) - Number(b.regularPrice),
+    );
+  if (sortValue === "regularPrice-desc")
+    filteredCabins?.sort(
+      (a, b) => Number(b.regularPrice) - Number(a.regularPrice),
+    );
+  if (sortValue === "maxCapacity-asc")
+    filteredCabins?.sort((a, b) => a.maxCapacity - b.maxCapacity);
+  if (sortValue === "maxCapacity-desc")
+    filteredCabins?.sort((a, b) => b.maxCapacity - a.maxCapacity);
 
   if (isLoading) return <LoadingSpinner />;
   return (
