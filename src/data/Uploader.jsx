@@ -139,7 +139,7 @@ function Uploader() {
   }
 
   return (
-    <div className="mt-auto p-4">
+    <div className="mt-auto hidden p-4 md:block">
       <Card x-chunk="dashboard-02-chunk-0">
         <CardHeader className="p-2 pt-0 md:p-4">
           <CardTitle>Sample Data</CardTitle>

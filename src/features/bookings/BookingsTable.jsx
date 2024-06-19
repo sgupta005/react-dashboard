@@ -16,9 +16,10 @@ import { useBookings } from "./useBookings";
 import BookingRow from "./BookingRow";
 import { LoadingSpinner } from "@/ui/Spinner";
 import BookingsOperations from "./BookingsOperations";
+import Pagination from "@/ui/Pagination";
 
 function BookingsTable() {
-  const { isLoading, bookings } = useBookings();
+  const { isLoading, bookings, count } = useBookings();
 
   if (isLoading) return <LoadingSpinner />;
   return (
@@ -29,7 +30,7 @@ function BookingsTable() {
         <Card x-chunk="dashboard-06-chunk-0" className="bg-muted/40">
           <CardHeader>
             <div className="flex justify-between">
-              <CardTitle>Bookings</CardTitle>
+              <CardTitle>All Bookings</CardTitle>
               <BookingsOperations />
             </div>
             <CardDescription>Manage all bookings.</CardDescription>
@@ -58,6 +59,7 @@ function BookingsTable() {
               </TableBody>
             </Table>
           </CardContent>
+          <Pagination count={count} />
         </Card>
       )}
     </main>
