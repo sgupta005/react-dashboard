@@ -15,6 +15,7 @@ import {
 import { useBookings } from "./useBookings";
 import BookingRow from "./BookingRow";
 import { LoadingSpinner } from "@/ui/Spinner";
+import BookingsOperations from "./BookingsOperations";
 
 function BookingsTable() {
   const { isLoading, bookings } = useBookings();
@@ -29,6 +30,7 @@ function BookingsTable() {
           <CardHeader>
             <div className="flex justify-between">
               <CardTitle>Bookings</CardTitle>
+              <BookingsOperations />
             </div>
             <CardDescription>Manage all bookings.</CardDescription>
           </CardHeader>

@@ -8,6 +8,7 @@ import { cabins } from "./data-cabins";
 import { guests } from "./data-guests";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/shadcn/ui/card";
 import { Button } from "@/ui/shadcn/ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -103,6 +104,7 @@ async function createBookings() {
 
 function Uploader() {
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
   async function uploadAll() {
     setIsLoading(true);
@@ -116,6 +118,13 @@ function Uploader() {
     await createCabins();
     await createBookings();
 
+    queryClient.invalidateQueries({
+      queryKey: ["bookings"],
+    });
+    queryClient.invalidateQueries({
+      queryKey: ["cabins"],
+    });
+
     setIsLoading(false);
   }
 
@@ -123,6 +132,9 @@ function Uploader() {
     setIsLoading(true);
     await deleteBookings();
     await createBookings();
+    queryClient.invalidateQueries({
+      queryKey: ["bookings"],
+    });
     setIsLoading(false);
   }
 
