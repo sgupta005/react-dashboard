@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { isFuture, isPast, isToday } from "date-fns";
 import supabase from "../services/supabase";
-import Button from "../ui/Button";
 import { subtractDates } from "../utils/helpers";
 
 import { bookings } from "./data-bookings";
 import { cabins } from "./data-cabins";
 import { guests } from "./data-guests";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/shadcn/ui/card";
+import { Button } from "@/ui/shadcn/ui/button";
 
 // const originalSettings = {
 //   minBookingLength: 3,
@@ -126,27 +127,30 @@ function Uploader() {
   }
 
   return (
-    <div
-      style={{
-        marginTop: "auto",
-        backgroundColor: "#e0e7ff",
-        padding: "8px",
-        borderRadius: "5px",
-        textAlign: "center",
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-      }}
-    >
-      <h3>SAMPLE DATA</h3>
-
-      <Button onClick={uploadAll} disabled={isLoading}>
-        Upload ALL
-      </Button>
-
-      <Button onClick={uploadBookings} disabled={isLoading}>
-        Upload bookings ONLY
-      </Button>
+    <div className="mt-auto p-4">
+      <Card x-chunk="dashboard-02-chunk-0">
+        <CardHeader className="p-2 pt-0 md:p-4">
+          <CardTitle>Sample Data</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4 p-2 pt-0 md:p-4 md:pt-0">
+          <Button
+            size="sm"
+            className="w-full"
+            onClick={uploadAll}
+            disabled={isLoading}
+          >
+            Upload All
+          </Button>
+          <Button
+            size="sm"
+            className="w-full"
+            onClick={uploadBookings}
+            disabled={isLoading}
+          >
+            Upload Bookings ONLY
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }

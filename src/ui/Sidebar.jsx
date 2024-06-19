@@ -1,5 +1,6 @@
 import { Calendar, Home, School, Settings, Users } from "lucide-react";
 import SidebarLink from "./SidebarLink";
+import Uploader from "@/data/Uploader";
 
 export default function Sidebar() {
   return (
@@ -35,6 +36,7 @@ export default function Sidebar() {
             </SidebarLink>
           </nav>
         </div>
+        <Uploader />
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ function BookingsTable() {
   return (
     <main className="grid flex-1 items-start">
       {bookings?.length === 0 ? (
-        <p>No bookings could be found.</p>
+        <p className="text-lg font-medium">No bookings could be found.</p>
       ) : (
         <Card x-chunk="dashboard-06-chunk-0" className="bg-muted/40">
           <CardHeader>

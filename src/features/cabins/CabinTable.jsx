@@ -84,6 +84,14 @@ function CabinTable() {
               ))}
             </TableBody>
           </Table>
+          {cabins.length === 0 &&
+            (isLoading ? (
+              <LoadingSpinner />
+            ) : (
+              <p className="mx-auto mt-6 w-max text-lg font-medium">
+                No data to show at the moment.
+              </p>
+            ))}
         </CardContent>
       </Card>
     </main>
