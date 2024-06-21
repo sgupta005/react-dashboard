@@ -21,6 +21,7 @@ export function useBookings() {
   const { isLoading, data: { data: bookings, count } = {} } = useQuery({
     queryKey: ["bookings", filter, sortBy, page],
     queryFn: () => getBookings({ filter, sortBy, page }),
+    retry: false,
   });
 
   if (page < Math.ceil(count / PAGE_COUNT))

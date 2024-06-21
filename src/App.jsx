@@ -1,18 +1,19 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import Dashboard from './pages/Dashboard';
-import Bookings from './pages/Bookings';
-import Account from './pages/Account';
-import Cabins from './pages/Cabins';
-import Login from './pages/Login';
-import PageNotFound from './pages/PageNotFound';
-import Settings from './pages/Settings';
-import Users from './pages/Users';
-import AppLayout from './ui/AppLayout';
-import { Toaster } from 'react-hot-toast';
-import { Button } from './ui/shadcn/ui/button';
+import Dashboard from "./pages/Dashboard";
+import Bookings from "./pages/Bookings";
+import Account from "./pages/Account";
+import Cabins from "./pages/Cabins";
+import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
+import Settings from "./pages/Settings";
+import Users from "./pages/Users";
+import AppLayout from "./ui/AppLayout";
+import { Toaster } from "react-hot-toast";
+import Booking from "./pages/Booking";
+import CheckIn from "./pages/CheckIn";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,6 +33,8 @@ function App() {
             <Route index element={<Navigate replace={true} to="dashboard" />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="bookings" element={<Bookings />} />
+            <Route path="bookings/:bookingId" element={<Booking />} />
+            <Route path="check-in/:bookingId" element={<CheckIn />} />
             <Route path="account" element={<Account />} />
             <Route path="cabins" element={<Cabins />} />
             <Route path="settings" element={<Settings />} />
@@ -48,7 +51,7 @@ function App() {
         toastOptions={{
           success: { duration: 2000 },
           error: { duration: 3000 },
-          className: 'py-[16px] px-[24px] text-[16px] max-w-[500px]',
+          className: "py-[16px] px-[24px] text-[16px] max-w-[500px]",
         }}
       />
     </QueryClientProvider>

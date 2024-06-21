@@ -1,10 +1,24 @@
+import BookingStatus from "./BookingStatus";
+import MenuItem from "@/ui/MenuItem";
+import { Button } from "@/ui/shadcn/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/ui/shadcn/ui/dropdown-menu";
 import { TableCell, TableRow } from "@/ui/shadcn/ui/table";
 import { formatCurrency, formatDistanceFromNow } from "@/utils/helpers";
+
 import { format, isToday } from "date-fns";
+import { Eye, MoreHorizontal, Vote } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function BookingRow({ booking }) {
+  const navigate = useNavigate();
+
   const {
     // created_at,
+    id,
     startDate,
     endDate,
     numNights,
@@ -13,17 +27,6 @@ function BookingRow({ booking }) {
     cabins: { name: cabinName },
     guests: { fullName: guestName, email },
   } = booking;
-
-  let statusClassname;
-  if (status === "unconfirmed")
-    statusClassname =
-      "w-max flex justify-center rounded-2xl bg-blue-100 py-1 px-2 font-medium uppercase text-blue-500";
-  if (status === "checked-in")
-    statusClassname =
-      "w-max flex justify-center rounded-2xl bg-green-100 py-1 px-2 font-medium uppercase text-emerald-700";
-  if (status === "checked-out")
-    statusClassname =
-      "w-max flex justify-center rounded-2xl bg-gray-200 py-1 px-2 font-medium uppercase text-gray-500";
 
   return (
     <TableRow>
@@ -48,11 +51,36 @@ function BookingRow({ booking }) {
         </p>
       </TableCell>
       <TableCell>
-        <p className={statusClassname}>{status}</p>
+        <BookingStatus status={status} />
       </TableCell>
 
       <TableCell className="font-semibold md:table-cell">
         {formatCurrency(totalPrice)}
+      </TableCell>
+      <TableCell>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              aria-haspopup="true"
+              size="icon"
+              variant="ghost"
+              className="hover:bg-muted-foreground/5"
+            >
+              <MoreHorizontal className="h-4 w-4" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <MenuItem onClick={() => navigate(`/bookings/${id}`)}>
+              <Eye /> <span>See Details</span>
+            </MenuItem>
+            {status === "unconfirmed" && (
+              <MenuItem onClick={() => navigate(`/check-in/${id}`)}>
+                <Vote /> <span>Check In</span>
+              </MenuItem>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </TableCell>
     </TableRow>
   );

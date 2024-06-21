@@ -17,6 +17,7 @@ import BookingRow from "./BookingRow";
 import { LoadingSpinner } from "@/ui/Spinner";
 import BookingsOperations from "./BookingsOperations";
 import Pagination from "@/ui/Pagination";
+import { PAGE_COUNT } from "@/utils/constants";
 
 function BookingsTable() {
   const { isLoading, bookings, count } = useBookings();
@@ -59,7 +60,7 @@ function BookingsTable() {
               </TableBody>
             </Table>
           </CardContent>
-          <Pagination count={count} />
+          {count / PAGE_COUNT > 1 && <Pagination count={count} />}
         </Card>
       )}
     </main>
