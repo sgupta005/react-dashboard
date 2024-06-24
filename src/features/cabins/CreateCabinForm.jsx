@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useEditCabin } from "./useEditCabin";
 import { useCreateCabin } from "./useCreateCabin";
 import FormRow from "@/ui/FormRow";
+import FormInput from "@/ui/FormInput";
 
 export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -41,25 +42,21 @@ export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent className="grid gap-4">
           <FormRow label="Cabin Name" error={errors?.name?.message}>
-            <input
-              {...register("name", {
+            <FormInput
+              register={register("name", {
                 required: "This field is required",
               })}
               id="name"
               disabled={isWorking}
-              className={
-                errors?.name?.message
-                  ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
-              }
+              error={errors?.name?.message}
             />
           </FormRow>
           <FormRow
             label="Maximum Capacity"
             error={errors?.maxCapacity?.message}
           >
-            <input
-              {...register("maxCapacity", {
+            <FormInput
+              register={register("maxCapacity", {
                 required: "This field is required",
                 min: {
                   value: 1,
@@ -69,35 +66,27 @@ export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
               disabled={isWorking}
               type="number"
               id="maxCapacity"
-              className={
-                errors?.maxCapacity?.message
-                  ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
-              }
+              error={errors?.maxCapacity?.message}
             />
           </FormRow>
           <FormRow label="Regular Price" error={errors?.regularPrice?.message}>
-            <input
-              {...register("regularPrice", {
+            <FormInput
+              register={register("regularPrice", {
                 required: "This field is required",
                 min: {
                   value: 0,
                   message: "Price can't be less than 0",
                 },
               })}
-              disabled={isWorking}
-              type="number"
               id="regularPrice"
-              className={
-                errors?.regularPrice?.message
-                  ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
-              }
+              type="number"
+              disabled={isWorking}
+              error={errors?.regularPrice?.message}
             />
           </FormRow>
           <FormRow label="Discount" error={errors?.discount?.message}>
-            <input
-              {...register("discount", {
+            <FormInput
+              register={register("discount", {
                 required: "This field is required",
                 min: {
                   value: 0,
@@ -107,15 +96,11 @@ export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
                   +discount <= +getValues().regularPrice ||
                   "Discount must be less than Price",
               })}
+              id="discount"
               defaultValue={0}
               disabled={isWorking}
               type="number"
-              id="discount"
-              className={
-                errors?.discount?.message
-                  ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
-              }
+              error={errors?.discount?.message}
             />
           </FormRow>
           <FormRow label="Description" error={errors?.description?.message}>
@@ -128,7 +113,7 @@ export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
               className={
                 errors?.description?.message
                   ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border border-gray-400 p-1 shadow-sm"
+                  : "w-52 rounded-sm border border-gray-300 p-1 shadow-sm"
               }
             />
           </FormRow>
