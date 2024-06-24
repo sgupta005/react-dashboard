@@ -17,6 +17,7 @@ import CabinRow from "./CabinRow";
 import { useCabins } from "./useCabins";
 import CabinOperations from "./CabinOperations";
 import { useSearchParams } from "react-router-dom";
+import EmptyTable from "@/ui/EmptyTable";
 
 function CabinTable() {
   const { isLoading, cabins } = useCabins();
@@ -85,13 +86,7 @@ function CabinTable() {
             </TableBody>
           </Table>
           {cabins.length === 0 &&
-            (isLoading ? (
-              <LoadingSpinner />
-            ) : (
-              <p className="mx-auto mt-6 w-max text-lg font-medium">
-                No data to show at the moment.
-              </p>
-            ))}
+            (isLoading ? <LoadingSpinner /> : <EmptyTable />)}
         </CardContent>
       </Card>
     </main>

@@ -24,6 +24,12 @@ export function useBookings() {
     retry: false,
   });
 
+  const { data: { count: totalCount } = {} } = useQuery({
+    queryKey: ["bookings"],
+    queryFn: getBookings,
+    retry: false,
+  });
+
   if (page < Math.ceil(count / PAGE_COUNT))
     queryClient.prefetchQuery({
       queryKey: ["bookings", filter, sortBy, page + 1],
@@ -35,5 +41,5 @@ export function useBookings() {
       queryFn: () => getBookings({ filter, sortBy, page: page - 1 }),
     });
 
-  return { isLoading, bookings, count };
+  return { isLoading, bookings, count, totalCount };
 }

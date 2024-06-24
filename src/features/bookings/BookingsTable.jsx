@@ -18,14 +18,15 @@ import { LoadingSpinner } from "@/ui/Spinner";
 import BookingsOperations from "./BookingsOperations";
 import Pagination from "@/ui/Pagination";
 import { PAGE_COUNT } from "@/utils/constants";
+import EmptyTable from "@/ui/EmptyTable";
 
 function BookingsTable() {
-  const { isLoading, bookings, count } = useBookings();
+  const { isLoading, bookings, count, totalCount } = useBookings();
 
   if (isLoading) return <LoadingSpinner />;
   return (
     <main className="grid flex-1 items-start">
-      {bookings?.length === 0 ? (
+      {totalCount === 0 ? (
         <p className="text-lg font-medium">No bookings could be found.</p>
       ) : (
         <Card x-chunk="dashboard-06-chunk-0" className="bg-muted/40">
@@ -59,6 +60,7 @@ function BookingsTable() {
                 ))}
               </TableBody>
             </Table>
+            {count === 0 && <EmptyTable />}
           </CardContent>
           {count / PAGE_COUNT > 1 && <Pagination count={count} />}
         </Card>

@@ -6,10 +6,16 @@ import { useBooking } from "./useBooking";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "@/ui/Spinner";
 import BookingDataBox from "./BookingDataBox";
+import { useCheckOut } from "./useCheckOut";
+import Modal from "@/ui/Modal";
+import ConfirmDelete from "@/ui/ConfirmDelete";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 function BookingDetails() {
   const navigate = useNavigate();
+  const { checkOutBooking, isCheckingOut } = useCheckOut();
   const { isLoading, booking } = useBooking();
+  const { deleteBooking, isDeletingBooking } = useDeleteBooking();
   const { id, status } = booking || {};
 
   if (isLoading) return <LoadingSpinner />;
@@ -37,6 +43,40 @@ function BookingDetails() {
             Check In
           </Button>
         )}
+        {status === "checked-in" && (
+          <Button
+            disabled={isCheckingOut}
+            size="lg"
+            onClick={() => {
+              checkOutBooking(id);
+              navigate(-1);
+            }}
+          >
+            Check Out
+          </Button>
+        )}
+        <Modal>
+          <Modal.Open opens="delete-booking">
+            <Button
+              variant="destructive"
+              size="lg"
+              onClick={() => {}}
+              disabled={isDeletingBooking}
+            >
+              Delete
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="delete-booking">
+            <ConfirmDelete
+              disabled={isDeletingBooking}
+              resourceName="booking"
+              onConfirm={() => {
+                deleteBooking(id);
+                navigate(-1);
+              }}
+            />
+          </Modal.Window>
+        </Modal>
         <Button variant="secondary" size="lg" onClick={() => navigate(-1)}>
           Back
         </Button>

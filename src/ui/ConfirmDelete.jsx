@@ -7,7 +7,7 @@ import {
   CardTitle,
 } from "./shadcn/ui/card";
 
-function ConfirmDelete({ resourceName, disabled, onClose, onConfirm }) {
+function ConfirmDelete({ resourceName, disabled = false, onClose, onConfirm }) {
   return (
     <Card className="border-none shadow-none">
       <CardHeader className="pt-0">
