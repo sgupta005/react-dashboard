@@ -20,3 +20,11 @@ export async function getCurrentUser() {
   if (error) throw new Error(error.message);
   return data?.user;
 }
+
+export async function logout() {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error(error);
+    throw new Error("There was an error while logging out.");
+  }
+}
