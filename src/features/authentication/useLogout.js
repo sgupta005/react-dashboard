@@ -14,7 +14,7 @@ export function useLogout() {
       navigate("/login", { replace: true });
     },
     onError: (error) => {
-      toast.error(error);
+      toast.error(error.message);
     },
   });
   return { logout, isLoading };

@@ -3,16 +3,27 @@ import FormRow from "@/ui/FormRow";
 import { Button } from "@/ui/shadcn/ui/button";
 import { Card, CardContent, CardFooter } from "@/ui/shadcn/ui/card";
 import { useForm } from "react-hook-form";
+import { useSignup } from "./useSignup";
+import SpinnerMini from "@/ui/SpinnerMini";
 
 function CreateUser() {
+  const { signup, isLoading } = useSignup();
   const {
     register,
     getValues,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm();
 
-  function onSubmit(data) {}
+  function onSubmit({ fullName, email, password }) {
+    signup(
+      { fullName, email, password },
+      {
+        onSettled: () => reset(),
+      },
+    );
+  }
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -20,6 +31,7 @@ function CreateUser() {
           <FormRow label="Full Name" error={errors?.fullName?.message}>
             <FormInput
               id="fullName"
+              disabled={isLoading}
               register={register("fullName", {
                 required: "This field is required",
               })}
@@ -30,6 +42,7 @@ function CreateUser() {
             <FormInput
               id="email"
               type="email"
+              disabled={isLoading}
               error={errors?.email?.message}
               register={register("email", {
                 required: "This field is required",
@@ -47,6 +60,7 @@ function CreateUser() {
             <FormInput
               id="password"
               type="password"
+              disabled={isLoading}
               error={errors?.password?.message}
               register={register("password", {
                 required: "This field is required",
@@ -64,6 +78,7 @@ function CreateUser() {
             <FormInput
               id="passwordConfirm"
               type="password"
+              disabled={isLoading}
               error={errors?.passwordConfirm?.message}
               register={register("passwordConfirm", {
                 required: "This field is required",
@@ -77,7 +92,9 @@ function CreateUser() {
           <Button variant="secondary" size="lg" type="reset">
             Cancel
           </Button>
-          <Button size="lg">Create User</Button>
+          <Button size="lg" disabled={isLoading}>
+            {isLoading ? <SpinnerMini /> : "Create User"}
+          </Button>
         </CardFooter>
       </form>
     </Card>
