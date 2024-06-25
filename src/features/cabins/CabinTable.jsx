@@ -54,7 +54,7 @@ function CabinTable() {
   if (isLoading) return <LoadingSpinner />;
   return (
     <main className="grid flex-1 items-start">
-      <Card x-chunk="dashboard-06-chunk-0" className="bg-muted/40">
+      <Card x-chunk="dashboard-06-chunk-0">
         <CardHeader>
           <div className="flex justify-between">
             <CardTitle>All Cabins</CardTitle>

@@ -3,6 +3,7 @@ import { Button } from "./shadcn/ui/button";
 import { X } from "lucide-react";
 import { cloneElement, createContext, useContext, useState } from "react";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
+import { Card } from "./shadcn/ui/card";
 
 const ModalContext = createContext();
 
@@ -30,7 +31,7 @@ function Window({ children, name }) {
 
   return createPortal(
     <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center backdrop-blur-sm">
-      <div
+      <Card
         className="h-max w-max space-y-4 rounded-md bg-background pb-6 shadow-2xl"
         ref={ref}
       >
@@ -42,7 +43,7 @@ function Window({ children, name }) {
           <X />
         </Button>
         {cloneElement(children, { onClose: close })}
-      </div>
+      </Card>
     </div>,
     document.body,
   );

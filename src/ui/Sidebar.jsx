@@ -4,7 +4,7 @@ import Uploader from "@/data/Uploader";
 
 export default function Sidebar() {
   return (
-    <div className="w-0 border-r bg-muted/40 [grid-column:1/2] [grid-row:1/3] md:w-[300px]">
+    <div className="w-0 border-r [grid-column:1/2] [grid-row:1/3] md:w-[300px]">
       <div className="flex flex-col gap-2">
         <img
           src="/logo-light.png"

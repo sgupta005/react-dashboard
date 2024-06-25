@@ -16,7 +16,7 @@ function UpdateSettingsForm() {
   }
   if (isLoading) return <LoadingSpinner />;
   return (
-    <Card className="w-full bg-muted/40">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Settings</CardTitle>
       </CardHeader>

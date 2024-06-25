@@ -25,7 +25,7 @@ function CreateUser() {
     );
   }
   return (
-    <Card className="bg-muted/40">
+    <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent className="mt-6 space-y-6">
           <FormRow label="Full Name" error={errors?.fullName?.message}>

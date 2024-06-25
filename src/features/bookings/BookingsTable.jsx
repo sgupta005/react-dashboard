@@ -29,7 +29,7 @@ function BookingsTable() {
       {totalCount === 0 ? (
         <p className="text-lg font-medium">No bookings could be found.</p>
       ) : (
-        <Card x-chunk="dashboard-06-chunk-0" className="bg-muted/40">
+        <Card x-chunk="dashboard-06-chunk-0">
           <CardHeader>
             <div className="flex justify-between">
               <CardTitle>All Bookings</CardTitle>

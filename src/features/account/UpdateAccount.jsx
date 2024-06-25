@@ -21,7 +21,7 @@ function UpdateAccount() {
   const [avatar, setAvatar] = useState(currentAvatar);
   function handleSubmit() {}
   return (
-    <Card className="bg-muted/40">
+    <Card>
       <CardHeader>
         <CardTitle>Update user data</CardTitle>
       </CardHeader>
