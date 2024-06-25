@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSettings } from "./useSettings";
 import { useUpdateSetting } from "./useUpdateSetting";
 import { LoadingSpinner } from "@/ui/Spinner";
+import { Input } from "@/ui/shadcn/ui/input";
 
 function UpdateSettingsForm() {
   const { isLoading, settings } = useSettings();
@@ -22,7 +23,7 @@ function UpdateSettingsForm() {
       <CardContent>
         <form className="mt-2 space-y-6">
           <FormRow label="Minimum nights/booking">
-            <input
+            <Input
               onBlurCapture={(e) =>
                 handleSubmit(e.target.value, "minBookingLength")
               }
@@ -31,11 +32,11 @@ function UpdateSettingsForm() {
               {...register("minBookingLength")}
               type="number"
               id="minBookingLenth"
-              className="w-52 rounded-sm border border-gray-300 p-1 shadow-sm"
+              className="w-52 rounded-sm p-1 shadow-sm"
             />
           </FormRow>
           <FormRow label="Maximum nights/booking">
-            <input
+            <Input
               onBlurCapture={(e) =>
                 handleSubmit(e.target.value, "maxBookingLength")
               }
@@ -44,11 +45,11 @@ function UpdateSettingsForm() {
               {...register("maxBookingLength")}
               type="number"
               id="maxBookingLenth"
-              className="w-52 rounded-sm border border-gray-300 p-1 shadow-sm"
+              className="w-52 rounded-sm p-1 shadow-sm"
             />
           </FormRow>
           <FormRow label="Maximum guests/booking">
-            <input
+            <Input
               onBlurCapture={(e) =>
                 handleSubmit(e.target.value, "minGuestsPerBooking")
               }
@@ -57,11 +58,11 @@ function UpdateSettingsForm() {
               {...register("minGuestsPerBooking")}
               type="number"
               id="minGuestsPerBooking"
-              className="w-52 rounded-sm border border-gray-300 p-1 shadow-sm"
+              className="w-52 rounded-sm p-1 shadow-sm"
             />
           </FormRow>
           <FormRow label="Breakfast price">
-            <input
+            <Input
               onBlurCapture={(e) =>
                 handleSubmit(e.target.value, "breakfastPrice")
               }
@@ -70,7 +71,7 @@ function UpdateSettingsForm() {
               {...register("breakfastPrice")}
               type="number"
               id="breakfastPrice"
-              className="w-52 rounded-sm border border-gray-300 p-1 shadow-sm"
+              className="w-52 rounded-sm p-1 shadow-sm"
             />
           </FormRow>
         </form>

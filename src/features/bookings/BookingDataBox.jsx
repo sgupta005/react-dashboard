@@ -39,7 +39,7 @@ export default function BookingDataBox({ booking }) {
     : "rounded-sm bg-yellow-100 text-yellow-700";
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="bg-primary text-background">
+      <CardHeader className="bg-muted/40">
         <CardTitle className="flex items-center justify-between gap-4 text-xl">
           <span className="flex items-center gap-4">
             <School className="h-7 w-7" />

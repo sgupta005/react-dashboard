@@ -6,7 +6,7 @@ import SpinnerMini from "@/ui/SpinnerMini";
 function LogoutIcon() {
   const { logout, isLoading } = useLogout();
   return (
-    <Button size="icon" onClick={logout} disabled={isLoading}>
+    <Button onClick={logout} disabled={isLoading} variant="outline" size="icon">
       {isLoading ? <SpinnerMini /> : <LogOut />}
     </Button>
   );

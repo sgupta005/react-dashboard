@@ -1,3 +1,5 @@
+import { Input } from "./shadcn/ui/input";
+
 function FormInput({
   register,
   disabled = false,
@@ -7,7 +9,7 @@ function FormInput({
   defaultValue,
 }) {
   return (
-    <input
+    <Input
       {...register}
       id={id}
       disabled={disabled}
@@ -16,7 +18,7 @@ function FormInput({
       className={
         error
           ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-          : "w-52 rounded-sm border border-gray-300 p-1 shadow-sm"
+          : "w-52 rounded-sm border p-1 shadow-sm"
       }
     />
   );

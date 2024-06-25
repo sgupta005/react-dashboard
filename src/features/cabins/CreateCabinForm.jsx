@@ -6,6 +6,7 @@ import { useEditCabin } from "./useEditCabin";
 import { useCreateCabin } from "./useCreateCabin";
 import FormRow from "@/ui/FormRow";
 import FormInput from "@/ui/FormInput";
+import { Textarea } from "@/ui/shadcn/ui/textarea";
 
 export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -104,7 +105,7 @@ export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
             />
           </FormRow>
           <FormRow label="Description" error={errors?.description?.message}>
-            <textarea
+            <Textarea
               {...register("description", {
                 required: "This field is required",
               })}
@@ -113,7 +114,7 @@ export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
               className={
                 errors?.description?.message
                   ? "w-52 rounded-sm border-2 border-red-600 p-1 shadow-sm outline-red-600"
-                  : "w-52 rounded-sm border border-gray-300 p-1 shadow-sm"
+                  : "w-52 rounded-sm p-1 shadow-sm"
               }
             />
           </FormRow>
@@ -125,7 +126,7 @@ export default function CreateCabinForm({ cabinToEdit = {}, onClose }) {
               {...register("image", {
                 required: isEditSession ? false : "This field is required",
               })}
-              className="file:boder-none file:mr-4 file:rounded-md file:bg-primary file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary-foreground file:hover:bg-primary/90"
+              className="file:boder-none file:mr-4 file:rounded-md file:bg-primary file:px-4 file:py-2 file:text-sm file:font-medium file:text-primary-foreground file:hover:cursor-pointer file:hover:bg-primary/90"
             />
           </FormRow>
         </CardContent>
