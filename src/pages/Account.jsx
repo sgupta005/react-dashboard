@@ -1,4 +1,4 @@
-import UpdateAccount from "@/features/account/UpdateAccount";
+import UpdateAccount from "@/features/authentication/UpdateAccount";
 
 function Account() {
   return (

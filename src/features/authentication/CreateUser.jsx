@@ -24,6 +24,9 @@ function CreateUser() {
       },
     );
   }
+  function handleCancel() {
+    reset();
+  }
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -89,7 +92,12 @@ function CreateUser() {
           </FormRow>
         </CardContent>
         <CardFooter className="flex w-full justify-end gap-4 pr-20">
-          <Button variant="secondary" size="lg" type="reset">
+          <Button
+            variant="secondary"
+            size="lg"
+            type="reset"
+            onClick={handleCancel}
+          >
             Cancel
           </Button>
           <Button size="lg" disabled={isLoading}>
