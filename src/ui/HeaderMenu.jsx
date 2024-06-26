@@ -29,8 +29,8 @@ function HeaderMenu() {
         >
           <User />
         </Button>
-        <LogoutIcon />
         <ThemeToggle />
+        <LogoutIcon />
       </div>
     </div>
   );

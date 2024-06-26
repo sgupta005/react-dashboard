@@ -38,7 +38,7 @@ function CheckInBooking() {
     settings?.breakfastPrice * numGuests * numNights;
 
   function handleCheckIn() {
-    if (!isPaid) return;
+    if (!confirmPaid) return;
     if (addBreakfast) {
       checkInBooking({
         bookingId: id,

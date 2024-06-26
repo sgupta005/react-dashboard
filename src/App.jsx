@@ -63,7 +63,8 @@ function App() {
           toastOptions={{
             success: { duration: 2000 },
             error: { duration: 3000 },
-            className: "py-[16px] px-[24px] text-[16px] max-w-[500px]",
+            className:
+              "py-[16px] px-[24px] text-[16px] max-w-[500px] bg-background border border-input text-primary",
           }}
         />
       </QueryClientProvider>
