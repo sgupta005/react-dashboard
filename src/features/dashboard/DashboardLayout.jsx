@@ -6,6 +6,7 @@ import { LoadingSpinner } from "@/ui/Spinner";
 import Stats from "./Stats";
 import { useCabins } from "../cabins/useCabins";
 import { DurationChart } from "./DurationChart";
+import { SalesChart } from "./SalesChart";
 
 function DashboardLayout() {
   const { bookings, isLoading: isLoadingBookings } = useRecentBookings();
@@ -26,13 +27,14 @@ function DashboardLayout() {
           ]}
         />
       </CardHeader>
-      <CardContent className="grid gap-6 [grid-template-columns:1fr_1fr_1fr_1fr] [grid-template-rows:110px_330px]">
+      <CardContent className="grid gap-6 [grid-template-columns:1fr_1fr_1fr_1fr] [grid-template-rows:110px_330px_auto]">
         <Stats
           bookings={bookings}
           confirmedStays={confirmedStays}
           numCabins={cabins.length}
         />
         <DurationChart confirmedStays={confirmedStays} />
+        <SalesChart />
       </CardContent>
     </Card>
   );
