@@ -10,7 +10,7 @@ import { SalesChart } from "./SalesChart";
 
 function DashboardLayout() {
   const { bookings, isLoading: isLoadingBookings } = useRecentBookings();
-  const { stays, confirmedStays, isLoading: isLoadingStays } = useRecentStays();
+  const { confirmedStays, isLoading: isLoadingStays } = useRecentStays();
   const { cabins, isLoading: isLoadingCabins } = useCabins();
   if (isLoadingBookings || isLoadingStays || isLoadingCabins)
     return <LoadingSpinner />;
@@ -34,7 +34,7 @@ function DashboardLayout() {
           numCabins={cabins.length}
         />
         <DurationChart confirmedStays={confirmedStays} />
-        <SalesChart />
+        <SalesChart bookings={bookings} />
       </CardContent>
     </Card>
   );

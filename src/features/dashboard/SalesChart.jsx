@@ -4,6 +4,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   XAxis,
+  YAxis,
 } from "recharts";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/shadcn/ui/card";
@@ -13,17 +14,8 @@ import {
   ChartTooltipContent,
 } from "@/ui/shadcn/ui/chart";
 import { getToday } from "@/utils/helpers";
-import { format, subDays } from "date-fns";
+import { eachDayOfInterval, format, isSameDay, subDays } from "date-fns";
 import { useSearchParams } from "react-router-dom";
-
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
 
 const chartConfig = {
   desktop: {
@@ -36,9 +28,22 @@ const chartConfig = {
   },
 };
 
-export function SalesChart() {
+export function SalesChart({ bookings }) {
   const [searchParams] = useSearchParams();
   const days = Number(searchParams.get("last")) ?? 7;
+  const allDates = eachDayOfInterval({
+    start: subDays(new Date(), days - 1),
+    end: new Date(),
+  });
+  const data = allDates.map((date) => ({
+    label: format(date, "dd MMM"),
+    totalSale: bookings
+      .filter((booking) => isSameDay(date, booking.created_at))
+      .reduce((acc, curr) => acc + curr.totalPrice, 0),
+    extrasSale: bookings
+      .filter((booking) => isSameDay(date, booking.created_at))
+      .reduce((acc, curr) => acc + curr.extrasPrice, 0),
+  }));
   return (
     <Card className="[grid-column:1/5] [grid-row:3/4]">
       <CardHeader>
@@ -47,42 +52,46 @@ export function SalesChart() {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer height={300}>
+        <ResponsiveContainer height={300} width={"100%"}>
           <ChartContainer config={chartConfig}>
             <AreaChart
-              data={chartData}
+              data={data}
               margin={{
                 left: 12,
                 right: 12,
               }}
             >
-              <CartesianGrid vertical={false} />
+              <CartesianGrid />
               <XAxis
-                dataKey="month"
+                dataKey="label"
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
                 tickFormatter={(value) => value.slice(0, 3)}
               />
+              <YAxis unit="$" />
               <ChartTooltip
                 cursor={false}
                 content={<ChartTooltipContent indicator="dot" />}
               />
+
               <Area
-                dataKey="mobile"
-                type="natural"
-                fill="var(--color-mobile)"
-                fillOpacity={0.4}
-                stroke="var(--color-mobile)"
-                stackId="a"
-              />
-              <Area
-                dataKey="desktop"
-                type="natural"
+                name="Total Sales"
+                dataKey="totalSale"
+                type="monotone"
                 fill="var(--color-desktop)"
                 fillOpacity={0.4}
                 stroke="var(--color-desktop)"
                 stackId="a"
+              />
+              <Area
+                name="Extras Sale"
+                dataKey="extrasSale"
+                type="monotone"
+                fill="var(--color-mobile)"
+                fillOpacity={0.4}
+                stroke="var(--color-mobile)"
+                stackId="b"
               />
             </AreaChart>
           </ChartContainer>
