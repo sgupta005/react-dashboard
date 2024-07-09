@@ -73,5 +73,19 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".no-scrollbar": {
+          "-ms-overflow-style": "none" /* Internet Explorer 10+ */,
+          "scrollbar-width": "none" /* Firefox */,
+          "&::-webkit-scrollbar": {
+            display: "none" /* Safari and Chrome */,
+          },
+        },
+      };
+      addUtilities(newUtilities);
+    },
+    require("tailwindcss-animate"),
+  ],
 };

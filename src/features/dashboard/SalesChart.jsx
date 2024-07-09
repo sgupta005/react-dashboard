@@ -6,13 +6,7 @@ import {
   XAxis,
 } from "recharts";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/ui/shadcn/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/ui/shadcn/ui/card";
 import {
   ChartContainer,
   ChartTooltip,

@@ -5,7 +5,7 @@ import { useSearchParams } from "react-router-dom";
 
 function Stats({ bookings, confirmedStays, numCabins }) {
   const [searchParams] = useSearchParams();
-  const numDays = searchParams.get("last");
+  const numDays = searchParams.get("last") ?? 7;
 
   const numBookings = bookings.length;
   const checkIns = confirmedStays.length;

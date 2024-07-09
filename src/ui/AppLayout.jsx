@@ -7,7 +7,7 @@ function AppLayout() {
     <div className="grid h-screen [grid-template-columns:auto_1fr] [grid-template-rows:60px_1fr]">
       <Sidebar />
       <Header />
-      <main className="overflow-auto [grid-column:2/3] [grid-row:2/3]">
+      <main className="no-scrollbar overflow-auto [grid-column:2/3] [grid-row:2/3]">
         <Outlet />
       </main>
     </div>
