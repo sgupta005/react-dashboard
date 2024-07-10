@@ -12,7 +12,7 @@ import { formatCurrency, formatDistanceFromNow } from "@/utils/helpers";
 import { format, isToday } from "date-fns";
 import { Eye, LogIn, LogOut, MoreHorizontal, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useCheckOut } from "./useCheckOut";
+import { useCheckOut } from "../check-in-out/useCheckOut";
 import { LoadingSpinner } from "@/ui/Spinner";
 import Modal from "@/ui/Modal";
 import ConfirmDelete from "@/ui/ConfirmDelete";

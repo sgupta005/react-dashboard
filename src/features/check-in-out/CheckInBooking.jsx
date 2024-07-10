@@ -1,17 +1,18 @@
-import BookingStatus from "./BookingStatus";
-
 import { Button } from "@/ui/shadcn/ui/button";
 import { ChevronLeft } from "lucide-react";
-import { useBooking } from "./useBooking";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "@/ui/Spinner";
-import BookingDataBox from "./BookingDataBox";
 import { Card } from "@/ui/shadcn/ui/card";
 import { Checkbox } from "@/ui/shadcn/ui/checkbox";
 import { useEffect, useState } from "react";
+
 import { formatCurrency } from "@/utils/helpers";
 import { useCheckInBooking } from "./useCheckInBooking";
 import { useSettings } from "../settings/useSettings";
+import { useBooking } from "../bookings/useBooking";
+
+import BookingStatus from "../bookings/BookingStatus";
+import BookingDataBox from "../bookings/BookingDataBox";
 
 function CheckInBooking() {
   const { isLoading, booking } = useBooking();

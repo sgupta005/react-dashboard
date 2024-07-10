@@ -6,7 +6,7 @@ import { useBooking } from "./useBooking";
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from "@/ui/Spinner";
 import BookingDataBox from "./BookingDataBox";
-import { useCheckOut } from "./useCheckOut";
+import { useCheckOut } from "../check-in-out/useCheckOut";
 import Modal from "@/ui/Modal";
 import ConfirmDelete from "@/ui/ConfirmDelete";
 import { useDeleteBooking } from "./useDeleteBooking";

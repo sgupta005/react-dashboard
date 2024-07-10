@@ -8,15 +8,20 @@ import {
 } from "./shadcn/ui/card";
 
 function ConfirmDelete({ resourceName, disabled = false, onClose, onConfirm }) {
+  const isConfirmCheckOut = resourceName == "Check Out";
   return (
     <Card className="border-none shadow-none">
       <CardHeader className="pt-0">
-        <CardTitle>Delete {resourceName}</CardTitle>
+        <CardTitle>
+          {isConfirmCheckOut ? "Check Out" : `Delete ${resourceName}`}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         <p className="w-[500px] text-lg">
-          Are you sure you want to delete this {resourceName} permanently? This
-          action cannot be undone.
+          {isConfirmCheckOut
+            ? "Are you sure you want to check out this booking? This action cannot be undone."
+            : `Are you sure you want to delete this ${resourceName} permanently? This
+          action cannot be undone.`}
         </p>
       </CardContent>
       <CardFooter className="flex justify-end space-x-4">
@@ -34,7 +39,7 @@ function ConfirmDelete({ resourceName, disabled = false, onClose, onConfirm }) {
           onClick={onConfirm}
           disabled={disabled}
         >
-          Delete
+          {isConfirmCheckOut ? "Check Out" : "Delete"}
         </Button>
       </CardFooter>
     </Card>

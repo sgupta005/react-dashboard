@@ -66,6 +66,7 @@ export function DurationChart({ confirmedStays }) {
               nameKey="nights"
               innerRadius={60}
               outerRadius={80}
+              paddingAngle={1}
             />
             <ChartLegend />
           </PieChart>
